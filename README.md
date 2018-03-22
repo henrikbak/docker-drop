@@ -15,7 +15,7 @@ $ docker-compose up -d
 ```
 2: Download Drupal using Composer.
 ```
-$ make download-drupal
+$ make drupal-download
 ```
 *This will download the drupal/drupal project from packagist to the /web folder and run a composer install. (Reference: https://packagist.org/packages/drupal/drupal)*.
 
