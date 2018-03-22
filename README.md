@@ -7,20 +7,44 @@ A Docker development setup optimized for Drupal 8.
 - PHP 7
 - Mysql
 
-## Features
-- Composer
-- Drupal Console Launcher
-
 ## Getting started:
+
+1: Start/build the Docker containers.
 ```
 $ docker-compose up -d
 ```
-
-## Downloading Drupal:
+2: Download Drupal using Composer.
 ```
-$ docker-compose exec php composer create-project drupal/drupal .
+$ make download-drupal
+```
+*This will download the drupal/drupal project from packagist to the /web folder and run a composer install. (Reference: https://packagist.org/packages/drupal/drupal)*.
+
+3: Install Drupal.
+*Go to http://localhost:8080 and complete the installation.*
+
+## .env
+The environment file contains credentials and version numbers for the Docker containers. This information is included both in the docker-compose.yml and the makefile.
+
+## Makefile
+The Makefile is intended to simplify the execution of commonly used commands. It is particularily useful for executing commands inside the Docker containers.
+
+### Composer
+Composer is installed globally inside the PHP container, which enables us to execute Composer commands.
+
+```
+$ make composer <command>
+$ make composer -- <command> --<arguments>
 ```
 
-This will download the latest version of Drupal to the web folder and run a composer install.
+### Database
+Import database
+```
+$ make mysql-import
+```
+*This will import dumps/dump.sql to your database*
 
-Go to http://localhost:8080 and go through the installation.
+Export database
+```
+$ make mysql-export
+```
+*This will export your database to dumps/dump.sql*
