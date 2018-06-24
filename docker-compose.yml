@@ -14,7 +14,7 @@ services:
 
   php:
     image: php:${PHP_VERSION}-fpm
-    build: ./php
+    build: ./builds/php
     volumes:
       - ./web:/var/www/html:cached
     networks:

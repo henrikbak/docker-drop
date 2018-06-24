@@ -27,3 +27,11 @@ RUN composer global require hirak/prestissimo
 RUN curl https://drupalconsole.com/installer -L -o drupal.phar \
     && mv drupal.phar /usr/local/bin/drupal \
     && chmod +x /usr/local/bin/drupal
+
+# Drush
+RUN composer global require drush/drush:^8.0
+
+# Drush launcher
+RUN wget -O drush.phar "https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar" \
+    && chmod +x drush.phar \
+    && mv drush.phar /usr/local/bin/drush
