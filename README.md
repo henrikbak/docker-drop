@@ -7,6 +7,10 @@ A Docker development setup optimized for Drupal 8.
 - PHP 7
 - Mysql
 
+## Tools
+- Drush
+- Drupal Console
+
 ## Getting started:
 
 1: Start/build the Docker containers.
@@ -15,9 +19,9 @@ $ docker-compose up -d
 ```
 2: Download Drupal using Composer.
 ```
-$ make drupal-download
+$ make drupal-kickstart
 ```
-*This will download the drupal/drupal project from packagist to the /web folder and run a composer install. (Reference: https://packagist.org/packages/drupal/drupal)*.
+*This will download the drupal/drupal project from packagist to the /web folder and run a composer install. (Reference: https://packagist.org/packages/drupal/drupal)*. This will also add Drush and Drupal Console in the project.
 
 3: Install Drupal.
 *Go to http://localhost:8080 and complete the installation.*
@@ -48,3 +52,11 @@ Export database
 $ make mysql-export
 ```
 *This will export your database to dumps/dump.sql*
+
+### Drush / Drupal Console
+```
+$ make drush <command>
+```
+```
+$ make drupal <command>
+```
