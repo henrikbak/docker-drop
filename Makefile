@@ -4,10 +4,10 @@ bash:
 	@docker-compose exec php bash
 
 drupal-kickstart:
-	#@docker-compose exec php rm .gitkeep
+	@docker-compose exec php rm -f .gitkeep
 	@docker-compose exec php composer create-project drupal/drupal .
 	@docker-compose exec php composer require drupal/console:$(CONSOLE_VERSION) --prefer-dist --optimize-autoloader
-	@docker-compose exec php composer require drush/drush
+	@docker-compose exec php composer require drush/drush:$(DRUSH_VERSION)
 
 ifeq (composer,$(firstword $(MAKECMDGOALS)))
   RUN_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
@@ -26,7 +26,7 @@ mysql-dump:
 	@docker-compose exec -T mysql mysqldump -u$(MYSQL_USER) -p$(MYSQL_PASSWORD) --databases $(MYSQL_DATABASE) > dumps/dump.sql
 
 drush:
-	@docker-compose exec php drush
+	@docker-compose exec php drush $(filter-out $@,$(MAKECMDGOALS))
 
 drupal:
-	@docker-compose exec php drupal
+	@docker-compose exec php drupal $(filter-out $@,$(MAKECMDGOALS))

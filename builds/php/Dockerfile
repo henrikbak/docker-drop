@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libpng-dev \
+    mysql-client \
     wget \
     curl \
     git \
@@ -29,7 +30,7 @@ RUN curl https://drupalconsole.com/installer -L -o drupal.phar \
     && chmod +x /usr/local/bin/drupal
 
 # Drush
-RUN composer global require drush/drush:^8.0
+RUN composer global require drush/drush:^9.0
 
 # Drush launcher
 RUN wget -O drush.phar "https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar" \
