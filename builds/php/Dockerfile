@@ -1,4 +1,8 @@
-FROM php:7.1-fpm
+FROM php:7.1.15-fpm
+
+ENV MAILHOG_VERSION v0.1.9
+ENV DRUSH_VERSION ~9.0
+ENV DRUSH_LAUNCHER_VERSION 0.6.0
 
 # Install packages.
 RUN apt-get update && apt-get install -y \ 
@@ -18,6 +22,10 @@ RUN docker-php-ext-install gd
 # Install PHP extensions. 
 RUN docker-php-ext-install opcache pdo pdo_mysql
 
+# Mailhog
+RUN curl -fSL "https://github.com/mailhog/MailHog/releases/download/${MAILHOG_VERSION}/MailHog_linux_amd64" -o /usr/local/bin/mailhog \
+    && chmod +x /usr/local/bin/mailhog
+
 # Install Composer.
 RUN wget -qO- https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -30,9 +38,9 @@ RUN curl https://drupalconsole.com/installer -L -o drupal.phar \
     && chmod +x /usr/local/bin/drupal
 
 # Drush
-RUN composer global require drush/drush:^9.0
+RUN composer global require drush/drush:${DRUSH_VERSION}
 
 # Drush launcher
-RUN wget -O drush.phar "https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar" \
+RUN wget -O drush.phar "https://github.com/drush-ops/drush-launcher/releases/download/${DRUSH_LAUNCHER_VERSION}/drush.phar" \
     && chmod +x drush.phar \
     && mv drush.phar /usr/local/bin/drush

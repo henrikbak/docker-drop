@@ -17,11 +17,11 @@ endif
 composer: 
 	@docker-compose exec php composer $(filter-out $@,$(MAKECMDGOALS))
 
-mysql-import:
+db-import:
 	@mkdir -p dumps
 	@docker-compose exec -T mysql mysql -u$(MYSQL_USER) -p$(MYSQL_PASSWORD) < dumps/dump.sql
 
-mysql-dump:
+db-export:
 	@mkdir -p dumps
 	@docker-compose exec -T mysql mysqldump -u$(MYSQL_USER) -p$(MYSQL_PASSWORD) --databases $(MYSQL_DATABASE) > dumps/dump.sql
 
