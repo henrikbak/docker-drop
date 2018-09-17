@@ -5,7 +5,7 @@ ENV DRUSH_VERSION ~9.0
 ENV DRUSH_LAUNCHER_VERSION 0.6.0
 
 # Install packages.
-RUN apt-get update && apt-get install -y \ 
+RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libpng-dev \
@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 RUN docker-php-ext-install gd
 
-# Install PHP extensions. 
+# Install PHP extensions.
 RUN docker-php-ext-install opcache pdo pdo_mysql
 
 # Mailhog

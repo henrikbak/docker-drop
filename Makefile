@@ -19,7 +19,7 @@ composer:
 
 db-import:
 	@mkdir -p dumps
-	@docker-compose exec -T mysql mysql -u$(MYSQL_USER) -p$(MYSQL_PASSWORD) < dumps/dump.sql
+	@docker-compose exec -T mysql mysql -u$(MYSQL_USER) -p$(MYSQL_PASSWORD) $(MYSQL_DATABASE) < dumps/dump.sql
 
 db-export:
 	@mkdir -p dumps
