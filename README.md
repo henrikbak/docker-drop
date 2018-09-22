@@ -1,6 +1,6 @@
 # Docker Drop
 
-A Docker development setup optimized for Drupal 8.
+A Docker development setup optimized for Drupal 8. Includes a kickstart command to spin up a new Drupal 8 website from scratch. Shortcut aliases are available for a better development workflow.
 
 ## Stack
 |Container|Version|Port|
@@ -8,7 +8,6 @@ A Docker development setup optimized for Drupal 8.
 |Nginx|1.14|8000
 |PHP|7.1.15|-
 |MYSQL|5.7|3306
-|Mailhog|0.1.9|8025
 
 ## Tools
 |Name|Version|
@@ -16,54 +15,53 @@ A Docker development setup optimized for Drupal 8.
 |Composer|Latest|
 |Drupal Console|~1.0|
 |Drush|~9.0|
-|Drush Launcher|0.6.0|
+|Mailhog|0.1.9|
 
 ## Getting started:
-
-1: Start/build the Docker containers.
-```
-$ docker-compose up -d
-```
-2: Download Drupal using Composer.
-```
-$ make drupal-kickstart
-```
-*This will download the drupal/drupal project from packagist to the /web folder and run a composer install. (Reference: https://packagist.org/packages/drupal/drupal)*. This will also add Drush and Drupal Console in the project.
-
-3: Install Drupal.
-*Go to http://localhost:8000 and complete the installation.*
-
-## .env
-The environment file contains credentials and version numbers for the Docker containers. This information is included both in the docker-compose.yml and the Makefile.
-
-## Makefile
-The Makefile is intended to simplify the execution of commonly used commands. It is particularily useful for executing commands inside the Docker containers.
-
-### Composer
-Composer is installed globally inside the PHP container, which enables us to execute Composer commands.
+To get up and running all you need to do is execute the following command.
 
 ```
-$ make composer <command>
-$ make composer -- <command> --<arguments>
+$ ./scripts/sc.sh drupal-kickstart
+```
+
+This will build and install a whole new Drupal 8 website from scratch. It will install Composer, Drush and Drupal Console in the build process. The Composer setup is based on drupal/drupal project from packagist (https://packagist.org/packages/drupal/drupal).
+
+The website will be accessible on http://localhost:8000 once the install has finished.
+
+## sc.sh - shortcuts
+The sc.sh file is intended to simplify the execution of commonly used commands. It's basically shortcuts for executing commands inside the Docker containers.
+
+Tip: It's recommended to create an alias for '/.scripts/sc.sh' in your .bashrc or .bash_profile.
+
+```
+echo "alias sc='./scripts/sc.sh'" >> ~/.bashrc
+```
+
+### Composer, Drush and Drupal Console.
+To execute these commands inside the Docker PHP container, just prefix with the 'sc' alias.
+
+```
+$ sc composer <command>
+```
+```
+$ sc drush <command>
+```
+```
+$ sc drupal <command>
 ```
 
 ### Database
 Import database
 ```
-$ make db-import
+$ sc db-import
 ```
-*Import dumps/dump.sql to your database*
+*Import dumps/import/import.sql to the database.*
 
 Export database
 ```
-$ make db-export
+$ sc db-export
 ```
-*Export your database to dumps/dump.sql*
+*Exports the current database to the dumps/export folder.*
 
-### Drush / Drupal Console
-```
-$ make drush <command>
-```
-```
-$ make drupal <command>
-```
+## .env
+The environment file contains credentials and version numbers for the Docker containers. This information is included both in the docker-compose.yml and the do.sh.
