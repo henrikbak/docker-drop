@@ -28,7 +28,7 @@ This will build and install a whole new Drupal 8 website from scratch. It will i
 
 The website will be accessible on http://localhost:8000 once the install has finished.
 
-## sc.sh - shortcuts
+## Shortcuts (sc.sh)
 The sc.sh file is intended to simplify the execution of commonly used commands. It's basically shortcuts for executing commands inside the Docker containers.
 
 Tip: It's recommended to create an alias for '/.scripts/sc.sh' in your .bashrc or .bash_profile.
@@ -64,4 +64,4 @@ $ sc db-export
 *Exports the current database to the dumps/export folder.*
 
 ## .env
-The environment file contains credentials and version numbers for the Docker containers. This information is included both in the docker-compose.yml and the do.sh.
+The environment file contains credentials and version numbers for the Docker containers. This information is included both in the docker-compose.yml and the sc.sh.
