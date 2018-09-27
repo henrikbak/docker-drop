@@ -11,10 +11,15 @@ services:
       - web
   php:
     image: php:${PHP_VERSION}-fpm
-    build: ./builds/php
+    build:
+      context: ./builds/php
+      args:
+        PHP_VERSION: ${PHP_VERSION}
+        MAILHOG_VERSION: ${MAILHOG_VERSION}
     volumes:
       - ./web:/var/www/html:cached
       - ./conf/php/php.ini:/usr/local/etc/php/php.ini
+      - ./scripts/drush.phar:/usr/local/bin/drush
     networks:
       - web
   mysql:

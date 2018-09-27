@@ -1,30 +1,36 @@
 # Docker Drop
 
-A Docker development setup optimized for Drupal 8. Includes a kickstart command to spin up a new Drupal 8 website from scratch. Shortcut aliases are available for a better development workflow.
+A Docker development setup optimized for Drupal 7/8. Includes a kickstart command to spin up a new Drupal website from scratch. Shortcut aliases are available for a better development workflow.
 
 ## Stack
 |Container|Version|Port|
 |---|---|---|
 |Nginx|1.14|8000
-|PHP|7.1.15|-
+|PHP|7.2|-
 |MYSQL|5.7|3306
 
 ## Tools
-|Name|Version|
-|---|---|
+|Name|Version|Port|
+|---|---|---|
 |Composer|Latest|
+|Drush|8.1.17|
 |Drupal Console|~1.0|
-|Drush|~9.0|
-|Mailhog|0.1.9|
+|Mailhog|1.0.0|8025
 
 ## Getting started:
-To get up and running all you need to do is execute the following command.
+To get up and running with a new site, all you need to do is execute one of the following commands.
 
 ```
-$ ./scripts/sc.sh drupal-kickstart
+$ ./scripts/sc.sh drupal8-kickstart
 ```
 
 This will build and install a whole new Drupal 8 website from scratch. It will install Composer, Drush and Drupal Console in the build process. The Composer setup is based on drupal/drupal project from packagist (https://packagist.org/packages/drupal/drupal).
+
+```
+$ ./scripts/sc.sh drupal7-kickstart
+```
+
+This will install a new Drupal 7 website.
 
 The website will be accessible on http://localhost:8000 once the install has finished.
 
@@ -53,15 +59,15 @@ $ sc drupal <command>
 ### Database
 Import database
 ```
-$ sc db-import
+$ sc import-db
 ```
-*Import dumps/import/import.sql to the database.*
+*Imports dumps/import/import.sql to the database.*
 
 Export database
 ```
-$ sc db-export
+$ sc export-db
 ```
 *Exports the current database to the dumps/export folder.*
 
 ## .env
-The environment file contains credentials and version numbers for the Docker containers. This information is included both in the docker-compose.yml and the sc.sh.
+The environment file contains credentials and version numbers for the Docker containers. This information is included both in the Dockerfile for PHP, the docker-compose.yml and the sc.sh.
