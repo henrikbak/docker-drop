@@ -18,7 +18,7 @@ function drupal {
 }
 
 function import-db {
-  FILE="dumps/import/import.sql"
+  FILE=$1
   if [ -f $FILE ]
   then
     docker-compose exec -T mysql mysql -u$MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE < $FILE
@@ -30,7 +30,7 @@ function import-db {
 function export-db {
   mkdir -p dumps/export
   DATE=`date +%Y%m%d-%H%M`
-  FILE="dumps/export/export-$DATE.sql"
+  FILE="dumps/export-$DATE.sql"
   docker-compose exec -T mysql mysqldump -u$MYSQL_USER -p$MYSQL_PASSWORD --databases $MYSQL_DATABASE > $FILE && echo "Database was exported to ./$FILE"
 }
 

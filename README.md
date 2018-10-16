@@ -1,6 +1,8 @@
 # Docker Drop
 
-A Docker development setup optimized for Drupal 7/8. Includes a kickstart command to spin up a new Drupal website from scratch. Shortcut aliases are available for a better development workflow.
+A Docker development setup optimized for Drupal 7/8. It can be used for an existing Drupal website, or you can choose to use one of the kickstart commands to spin up a new Drupal website from scratch.
+
+Shortcut aliases are available for a more efficient development workflow.
 
 ## Stack
 |Container|Version|Port|
@@ -18,21 +20,23 @@ A Docker development setup optimized for Drupal 7/8. Includes a kickstart comman
 |Mailhog|1.0.0|8025
 
 ## Getting started:
-To get up and running with a new site, all you need to do is execute one of the following commands.
 
+### Existing site
+1. `$ docker-compose up -d`
+2. Place the files of the existing website in the **./web** folder.
+3. Import the database and adjust the db credentials in your settings file.
+
+### New site - Drupal 8
 ```
 $ ./scripts/sc.sh drupal8-kickstart
 ```
+This will build and install a new Drupal 8 website. It will install Composer, Drush and Drupal Console in the build process. The Composer setup is based on drupal/drupal project from packagist (https://packagist.org/packages/drupal/drupal).
 
-This will build and install a whole new Drupal 8 website from scratch. It will install Composer, Drush and Drupal Console in the build process. The Composer setup is based on drupal/drupal project from packagist (https://packagist.org/packages/drupal/drupal).
-
+### New site - Drupal 7
 ```
 $ ./scripts/sc.sh drupal7-kickstart
 ```
-
 This will install a new Drupal 7 website.
-
-The website will be accessible on http://localhost:8000 once the install has finished.
 
 ## Shortcuts (sc.sh)
 The sc.sh file is intended to simplify the execution of commonly used commands. It's basically shortcuts for executing commands inside the Docker containers.
@@ -59,15 +63,15 @@ $ sc drupal <command>
 ### Database
 Import database
 ```
-$ sc import-db
+$ sc import-db <path_to_file>
 ```
-*Imports dumps/import/import.sql to the database.*
+*Imports a sql file to the database.*
 
 Export database
 ```
 $ sc export-db
 ```
-*Exports the current database to the dumps/export folder.*
+*Exports the current database to a sql file in the dumps/export folder.*
 
 ## .env
 The environment file contains credentials and version numbers for the Docker containers. This information is included both in the Dockerfile for PHP, the docker-compose.yml and the sc.sh.
