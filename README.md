@@ -5,26 +5,28 @@ A Docker development setup optimized for Drupal 7/8. It can be used for an exist
 Shortcut aliases are available for a more efficient development workflow.
 
 ## Stack
-|Container|Version|Port|
+|Image|Version|Port|
 |---|---|---|
-|Nginx|1.14|8000
-|PHP|7.2|-
-|MYSQL|5.7|3306
+|Nginx|1.14|8000|
+|PHP|7.1|-|
+|MYSQL|5.7|3306|
+|Mailhog|1.0.0|8025|
+
+Version numbers are adjustable in the .env file.
 
 ## Tools
-|Name|Version|Port|
-|---|---|---|
+|Name|Version|
+|---|---|
 |Composer|Latest|
 |Drush|8.1.17|
 |Drupal Console|~1.0|
-|Mailhog|1.0.0|8025
 
 ## Getting started:
 
 ### Existing site
-1. `$ docker-compose up -d`
-2. Place the files of the existing website in the **./web** folder.
-3. Import the database and adjust the db credentials in your settings file.
+1. Files: Place the files of the existing website in the **./web** folder.
+2. Database: Place existing database by placing the sql-file in **./data/init** and adjust the db credentials in your settings file.
+3. `$ docker-compose up -d`
 
 ### New site - Drupal 8
 ```
@@ -71,7 +73,7 @@ Export database
 ```
 $ sc export-db
 ```
-*Exports the current database to a sql file in the dumps/export folder.*
+*Exports the current database to a sql file in the './data/db-dump' folder.*
 
 ## .env
 The environment file contains credentials and version numbers for the Docker containers. This information is included both in the Dockerfile for PHP, the docker-compose.yml and the sc.sh.
