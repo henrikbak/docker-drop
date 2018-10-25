@@ -24,8 +24,8 @@ Version numbers are adjustable in the .env file.
 ## Getting started:
 
 ### Existing site
-1. Files: Place the files of the existing website in the **./web** folder.
-2. Database: Place existing database by placing the sql-file in **./data/init** and adjust the db credentials in your settings file.
+1. Place the files of the existing website in the **./web** folder.
+2. Import a existing database by placing the sql-file in **./data/init** folder.
 3. `$ docker-compose up -d`
 
 ### New site - Drupal 8
