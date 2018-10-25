@@ -28,6 +28,8 @@ services:
       - "3306:3306"
     volumes:
       - ./conf/mysql/my.cnf:/etc/mysql/my.cnf
+      - ./data/db:/var/lib/mysql
+      - ./data/db-init:/docker-entrypoint-initdb.d
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_ROOT_USER: ${MYSQL_ROOT_USER}

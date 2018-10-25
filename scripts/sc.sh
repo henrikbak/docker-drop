@@ -30,7 +30,7 @@ function import-db {
 function export-db {
   mkdir -p dumps/export
   DATE=`date +%Y%m%d-%H%M`
-  FILE="dumps/export-$DATE.sql"
+  FILE="data/db-dump/export-$DATE.sql"
   docker-compose exec -T mysql mysqldump -u$MYSQL_USER -p$MYSQL_PASSWORD --databases $MYSQL_DATABASE > $FILE && echo "Database was exported to ./$FILE"
 }
 

@@ -1,3 +1,4 @@
-web/*
-!web/.gitkeep
+/web/*
+/!web/.gitkeep
+/data/db
 .vscode
