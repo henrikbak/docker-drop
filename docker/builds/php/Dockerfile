@@ -1,6 +1,4 @@
-ARG PHP_VERSION
-FROM php:${PHP_VERSION}-fpm
-ARG MAILHOG_VERSION
+FROM php:7.2-fpm
 
 # Install packages.
 RUN apt-get update && apt-get install -y \
@@ -21,11 +19,8 @@ RUN docker-php-ext-install gd
 RUN docker-php-ext-install opcache pdo pdo_mysql
 
 # Mailhog
-RUN curl -fSL https://github.com/mailhog/MailHog/releases/download/v${MAILHOG_VERSION}/MailHog_linux_amd64 -o /usr/local/bin/mailhog \
+RUN curl -fSL https://github.com/mailhog/MailHog/releases/download/v1.0.0/MailHog_linux_amd64 -o /usr/local/bin/mailhog \
     && chmod +x /usr/local/bin/mailhog
-
-# Install Composer.
-RUN wget -qO- https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Plugin for parallel composer install.
 RUN composer global require hirak/prestissimo

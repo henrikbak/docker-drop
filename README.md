@@ -8,11 +8,9 @@ Shortcut aliases are available for a more efficient development workflow.
 |Image|Version|Port|
 |---|---|---|
 |Nginx|1.14|8000|
-|PHP|7.1|-|
+|PHP|7.2|-|
 |MYSQL|5.7|3306|
 |Mailhog|1.0.0|8025|
-
-Version numbers are adjustable in the .env file.
 
 ## Tools
 |Name|Version|
@@ -74,6 +72,3 @@ Export database
 $ sc export-db
 ```
 *Exports the current database to a sql file in the './data/db-dump' folder.*
-
-## .env
-The environment file contains credentials and version numbers for the Docker containers. This information is included both in the Dockerfile for PHP, the docker-compose.yml and the sc.sh.
